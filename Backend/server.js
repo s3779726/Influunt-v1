@@ -20,10 +20,6 @@ const ListSchema = new mongoose.Schema({
 
 const List = mongoose.model("List", ListSchema);
 
-app.get("/", (req,res) => {
-    res.send("hello world");
-});
-
 app.route("/lists").get(function(req,res){
     List.find({}, function(err,lists){
         if(err){
