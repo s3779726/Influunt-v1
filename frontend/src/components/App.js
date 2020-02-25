@@ -6,8 +6,8 @@ function App() {
   return (
       <div>
         <Navbar/>
-        <h1 class="display-4 list-title">Project title</h1>
-        <div class="container-fluid">
+        <h1 className="display-4 list-title">Project title</h1>
+        <div className="container-fluid">
         <List/>
         <List/>
         <List/>

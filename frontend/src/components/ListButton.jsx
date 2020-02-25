@@ -12,7 +12,7 @@ function ListButton(){
 
       
 return (<div>
-            <button type="button" class="btn btn-primary list-group-item list-button" data-toggle="modal" data-target="#createTaskModal">
+            <button type="button" className="btn btn-primary list-group-item list-button" data-toggle="modal" data-target="#createTaskModal">
                 <li>
                     Add Task...
                     <AddBoxIcon style = {iconMargin} />
