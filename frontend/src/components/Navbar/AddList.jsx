@@ -1,7 +1,7 @@
 import React from "react";
 import AddListModal from "../Modals/AddListModal";
 
-function AddList(){
+function AddList(props){
 return (
 <div>
     <ul className = "navbar-nav">
@@ -11,7 +11,7 @@ return (
             </button>
         </li>
     </ul>
-    <AddListModal/>
+    <AddListModal onClick = {props.addList}/>
 </div>
 
 

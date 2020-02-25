@@ -18,10 +18,16 @@ function App() {
       });
   }, []);
 
+  function addList(list){
+    setLists((prevValue) =>{
+      return [...prevValue, list];
+    });
+  }
+
 
   return (
       <div>
-        <Navbar/>
+        <Navbar addList={addList} />
         <h1 className="display-4 list-title">Project Task Lists</h1>
         <div className="container-fluid">
 

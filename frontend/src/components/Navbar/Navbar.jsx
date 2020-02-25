@@ -1,7 +1,7 @@
 import React from "react";
 import AddList from "./AddList"
 
-function Navbar(){
+function Navbar(props){
     return (
         <nav className = "navbar navbar-expand-lg navbar-dark bg-dark add-padding add-nav">
         <a className = "navbar-brand nav-text" href= "/">Influunt</a>
@@ -20,7 +20,7 @@ function Navbar(){
             <ul className = "navbar-nav">
                 <li className = "nav-item"><a className = "nav-link" href ="/">Contact</a></li>
             </ul>
-            <AddList/>
+            <AddList addList = {props.addList}/>
             </div>
         </nav>
     );

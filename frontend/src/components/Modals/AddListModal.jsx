@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
-function AddListModal(){
+function AddListModal(props){
 
     const [listTitle, setListTitle] = useState("");
 
@@ -20,13 +20,15 @@ function AddListModal(){
         
         axios.post('/lists', bodyFormData)
           .then(function (response) {
-            console.log(response);
+            props.onClick(response.data);
           })
           .catch(function (error) {
             console.log(error);
           });
 
-          
+        
+
+
     }
 
     return (
@@ -41,13 +43,13 @@ function AddListModal(){
           </button>
             </div>
             <div className="modal-body">
-              <form onSubmit = {handleSubmit}>
+              <form>
                   <div className="form-group">
                     <label htmlFor="taskName" className="col-form-label">List Title:</label>
                     <input onChange = {handleChange} type="text"  name="listTitle" className="form-control" autoComplete="off"/>
                   </div>    
             
-              <button type="submit" className="btn btn-primary add-list-button">Add</button>
+              <button type="submit" onClick = {handleSubmit} data-dismiss="modal" className="btn btn-primary add-list-button">Add</button>
 
             </form>
             </div>
