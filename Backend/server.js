@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost:27017/todoListDB', {useNewUrlParser: true,
 
 const TaskSchema = new mongoose.Schema({
     taskName:String,
+    content:String
 });
 
 const ListSchema = new mongoose.Schema({
