@@ -1,4 +1,5 @@
 import React from "react";
+import AddList from "./AddList"
 
 function Navbar(){
     return (
@@ -19,6 +20,7 @@ function Navbar(){
             <ul className = "navbar-nav">
                 <li className = "nav-item"><a className = "nav-link" href ="/">Contact</a></li>
             </ul>
+            <AddList/>
             </div>
         </nav>
     );

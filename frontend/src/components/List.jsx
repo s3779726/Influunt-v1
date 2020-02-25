@@ -2,7 +2,7 @@ import React from "react";
 import ListButton from "./ListButton"
 
 
-function List(){
+function List(props){
     const widthOfList = {
         width:"18rem"
     }
@@ -11,7 +11,7 @@ function List(){
     return(
         <div className="card list" style={widthOfList}>
         <div className="card-header">
-          Featured
+          {props.listTitle}
         </div>
         <ul className="list-group list-group-flush remove-list-bullet">
           <li className="list-group-item">Cras justo odio</li>
