@@ -1,6 +1,8 @@
 import React from "react";
 import ListButton from "./ListButton"
 
+import DeleteListButton from "./DeleteListButton";
+
 
 function List(props){
     const widthOfList = {
@@ -10,8 +12,9 @@ function List(props){
 
     return(
         <div className="card list" style={widthOfList}>
-        <div className="card-header">
-          {props.listTitle}
+        <div className="card-header list-header">
+          <h5 className = "list-heading">{props.listTitle}</h5>
+         <DeleteListButton listId = {props.id} deleteList = {props.deleteList}/>
         </div>
         <ul className="list-group list-group-flush remove-list-bullet">
           <li className="list-group-item">Cras justo odio</li>

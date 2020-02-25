@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import Navbar from "./Navbar/Navbar";
-import List from "./List";
+import List from "./List components/List";
 import axios from "axios";
 
 function App() {
@@ -10,7 +10,6 @@ function App() {
   useEffect(() => {
     axios.get('/lists')
       .then(function (response) {
-        console.log(response.data);
         setLists(response.data);
       })
       .catch(function (error) {
@@ -24,6 +23,13 @@ function App() {
     });
   }
 
+  function deleteList(id){
+    setLists((prevValue) => {
+      return prevValue.filter((list) =>{
+        return list._id !== id;
+      });
+    });
+  }
 
   return (
       <div>
@@ -32,7 +38,7 @@ function App() {
         <div className="container-fluid">
 
           {lists.map((list) => {
-            return (<List key={list._id} id = {list._id} listTitle={list.listTitle}/>)
+            return (<List key={list._id} id = {list._id} listTitle={list.listTitle} deleteList = {deleteList}/>)
           })}
         </div>
         

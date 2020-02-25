@@ -1,6 +1,6 @@
 import React from "react";
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import CreateTaskModal from "./Modals/CreateTaskModal";
+import CreateTaskModal from "../Modals/CreateTaskModal";
 
 
 

@@ -8,7 +8,6 @@ function AddListModal(props){
     function handleChange(event){
         const enteredListTitle = event.target.value;
         setListTitle(enteredListTitle);
-        console.log(listTitle);
     }
 
     function handleSubmit(e){

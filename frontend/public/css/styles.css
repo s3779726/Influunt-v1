@@ -42,3 +42,20 @@
 .add-list-button{
   float:right;
 }
+
+.list-heading{
+ 
+  display:inline-block;
+}
+
+.list-header{
+  position: relative;
+}
+
+
+.delete-list{
+  
+  position: absolute;
+  right:15px;
+  bottom:8px;
+}
