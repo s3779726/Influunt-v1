@@ -1,5 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
 function AddListModal(){
+
+    const [listTitle, setListTitle] = useState("");
+
+
+    function handleChange(event){
+        const enteredListTitle = event.target.value;
+        setListTitle(enteredListTitle);
+        console.log(listTitle);
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        const bodyFormData = {
+            listTitle: listTitle
+        }
+        
+        
+        axios.post('/lists', bodyFormData)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+          
+    }
+
     return (
     
         <div className="modal fade"  id="addListModal">
@@ -12,11 +41,11 @@ function AddListModal(){
           </button>
             </div>
             <div className="modal-body">
-              <form action="" method="post">
+              <form onSubmit = {handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="taskName" className="col-form-label">List Title:</label>
-                    <input type="text"  name="listName" className="form-control"/>
-                  </div>
+                    <input onChange = {handleChange} type="text"  name="listTitle" className="form-control" autoComplete="off"/>
+                  </div>    
             
               <button type="submit" className="btn btn-primary add-list-button">Add</button>
 
