@@ -2,7 +2,7 @@ import React from "react";
 
 function Task(props){
 
-    return ( <li className="list-group-item">{props.taskName}</li>);
+    return ( <button className="list-group-item custom-list-item"> <li >{props.taskName}</li>  </button>);
 }
 
 export default Task;
