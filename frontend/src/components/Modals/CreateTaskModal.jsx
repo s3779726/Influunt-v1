@@ -1,5 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 function CreateTaskModal(){
+
+    const [task, setTask] = useState({
+        name:"",
+        desc:""
+
+    });
+
+    function handleChange(e){
+        const {name, value} = e.target;
+        setTask((prevValue) => {
+           return {...prevValue, [name]:value};
+
+        });
+    }
+
+    function handleClick(e){
+        e.preventDefault();
+        console.log(task);
+    }
+
+
     return (
     
     <div className="modal fade"  id="createTaskModal" tabIndex="-1" role="dialog" aria-labelledby="createTaskModalLabel" aria-hidden="true">
@@ -14,12 +35,12 @@ function CreateTaskModal(){
         <div className="modal-body">
           <form>
               <div className="form-group">
-                <label htmlFor="taskName" className="col-form-label">Task Name:</label>
-                <input type="text"  name = "taskName" className="form-control"/>
+                <label htmlFor="taskName"  className="col-form-label" >Task Name:</label>
+                <input type="text" onChange = {handleChange}  name = "name" className="form-control"/>
               </div>
              <div className="form-group">
-              <label htmlFor="message-text" className="col-form-label">Task Desc:</label>
-              <textarea className="form-control" rows="7"></textarea>
+              <label htmlFor="message-text"   className="col-form-label" >Task Desc:</label>
+              <textarea className="form-control"  onChange = {handleChange} name = "desc" rows="7"/>
               
             </div>
           </form>
@@ -27,7 +48,7 @@ function CreateTaskModal(){
 
         <div className="modal-footer">
           <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" className="btn btn-primary">Save changes</button>
+          <button type="button" onClick = {handleClick} className="btn btn-primary">Add Task</button>
         </div>
       </div>
     </div>

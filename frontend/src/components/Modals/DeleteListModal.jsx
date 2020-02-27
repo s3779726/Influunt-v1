@@ -10,6 +10,7 @@ function DeleteListModal(props){
         axios.delete(`/lists/${props.listId}`)
         .then(function(response){
             props.deleteList(props.listId);
+
         })
         .catch(function(err){
             console.log(err);

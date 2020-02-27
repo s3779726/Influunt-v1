@@ -14,16 +14,20 @@ function AddListModal(props){
         e.preventDefault();
         const bodyFormData = {
             listTitle: listTitle
-        }
+        };
         
         
         axios.post('/lists', bodyFormData)
           .then(function (response) {
             props.onClick(response.data);
+
+
           })
           .catch(function (error) {
             console.log(error);
-          });
+          }).finally(function(){
+            setListTitle("");
+        });
 
         
 
@@ -45,7 +49,7 @@ function AddListModal(props){
               <form>
                   <div className="form-group">
                     <label htmlFor="taskName" className="col-form-label">List Title:</label>
-                    <input onChange = {handleChange} type="text"  name="listTitle" className="form-control" autoComplete="off"/>
+                    <input onChange = {handleChange} type="text"  name="listTitle" className="form-control" autoComplete="off" value = {listTitle}/>
                   </div>    
             
               <button type="submit" onClick = {handleSubmit} data-dismiss="modal" className="btn btn-primary add-list-button">Add</button>

@@ -1,25 +1,39 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import ListButton from "./ListButton"
+import ListHeader from "./ListHeader";
+import Task from "./Task";
+import axios from "axios";
 
-import DeleteListButton from "./DeleteListButton";
 
 
 function List(props){
-    const widthOfList = {
-        width:"18rem"
-    }
-    
+
+    const [tasks, setTask] = useState([]);
+
+    useEffect(() =>{
+        axios.get(`/lists/${props.id}`)
+
+            .then(function(response){
+                const [responseData] = response.data;
+                setTask(responseData.tasks);
+
+        })
+            .catch(function(error){
+                console.log(error);
+
+        });
+    },[props.id]);
+
+
 
     return(
-        <div className="card list" style={widthOfList}>
-        <div className="card-header list-header">
-          <h5 className = "list-heading">{props.listTitle}</h5>
-         <DeleteListButton listId = {props.id} deleteList = {props.deleteList}/>
-        </div>
+        <div className="card list list-width">
+        <ListHeader id = {props.id} deleteList = {props.deleteList} listTitle = {props.listTitle}/>
         <ul className="list-group list-group-flush remove-list-bullet">
-          <li className="list-group-item">Cras justo odio</li>
-          <li className="list-group-item">Dapibus ac facilisis in</li>
-          <li className="list-group-item">Vestibulum at eros</li>
+            {tasks.map((task) => {
+               return <Task key = {task._id} id = {task._id} taskName = {task.taskName} taskDesc = {task.content}/>
+            })}
+
           <ListButton/>
           
 

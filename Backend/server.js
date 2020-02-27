@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const app = express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
+app.use(bodyParser.json());
 
 mongoose.connect('mongodb://localhost:27017/todoListDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -32,7 +33,10 @@ app.route("/lists").get(function(req,res){
     });
 })
 .post(function(req,res){
-    const listTitle = req.body.title;
+    const listTitle = req.body.listTitle;
+
+    const newData = req.body;
+    console.log(newData);
     const newList = new List({
         listTitle:listTitle,
         tasks:[]
@@ -43,7 +47,7 @@ app.route("/lists").get(function(req,res){
             console.log(err);
             
         } else{
-            res.send("Successfully added a new List");
+            res.send(newList);
         }
     });
 
@@ -68,8 +72,9 @@ app.route("/lists/:listId")
 })
 .patch(function(req,res){  
     const updateObject = req.body;
+    console.log(req.body);
     List.update({ _id:req.params.listId}, { $set: updateObject}, function(err) {
-        (err)?console.log(err): res.send("SUccessfully updated the list");
+        (err)?console.log(err): res.send("Successfully updated the list");
         
       });
 })
@@ -82,7 +87,7 @@ app.route("/lists/:listId")
 })
 .delete(function(req,res){
     List.deleteOne({ _id: req.params.listId }, function (err) {
-        (err) ? console.log(err): res.send("Sucessfully deleted the list");
+        (err) ? console.log(err): res.send("Successfully deleted the list");
 
       });
 
