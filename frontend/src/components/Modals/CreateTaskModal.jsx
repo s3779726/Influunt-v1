@@ -7,7 +7,7 @@ function CreateTaskModal(props){
         content:""
 
     });
-
+// stores the new task as a state and updates it as the user types in information
     function handleChange(e){
         const {name, value} = e.target;
         setTask((prevValue) => {
@@ -15,7 +15,7 @@ function CreateTaskModal(props){
 
         });
     }
-
+//updates the database and adds task to list
     function handleClick(e){
         e.preventDefault();
         const bodyData = {
@@ -24,17 +24,11 @@ function CreateTaskModal(props){
 
 
 
-        // const jsonData = JSON.stringify(bodyData);
 
         axios.patch(`/lists/${props.listId}`, bodyData)
             .then(function (response) {
                 // handle success
-                console.log(response);
                 props.onClick(task);
-                setTask({
-                    taskName:"",
-                    content:""
-                });
 
 
             })
@@ -43,7 +37,11 @@ function CreateTaskModal(props){
                 console.log(error);
             })
             .then(function () {
-                // always executed
+                setTask({
+                    taskName:"",
+                    content:""
+                });
+
             });
     }
 
@@ -63,11 +61,11 @@ function CreateTaskModal(props){
           <form>
               <div className="form-group">
                 <label htmlFor="taskName"  className="col-form-label" >Task Name:</label>
-                <input type="text" onChange = {handleChange}  autoComplete="off" name = "taskName" className="form-control"/>
+                <input type="text" onChange = {handleChange}  autoComplete="off" name = "taskName" className="form-control" value = {task.taskName}/>
               </div>
              <div className="form-group">
-              <label htmlFor="message-text"   className="col-form-label" >Break down the task into smaller steps:</label>
-              <textarea className="form-control"  onChange = {handleChange} name = "content" rows="7"/>
+              <label htmlFor="message-text"   className="col-form-label" >Description:</label>
+              <textarea className="form-control"  onChange = {handleChange} name = "content" rows="7" value={task.content}/>
               
             </div>
           </form>

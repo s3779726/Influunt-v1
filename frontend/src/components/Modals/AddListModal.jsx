@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 function AddListModal(props){
 
+    //captures the state of the list title
     const [listTitle, setListTitle] = useState("");
 
 
@@ -10,6 +11,7 @@ function AddListModal(props){
         setListTitle(enteredListTitle);
     }
 
+    //when user clicks submit, makes post request to backend and creates new list
     function handleSubmit(e){
         e.preventDefault();
         const bodyFormData = {

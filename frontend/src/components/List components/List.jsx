@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from "react";
-import ListButton from "./ListButton"
+import AddTaskButton from "../Tasks/AddTaskButton"
 import ListHeader from "./ListHeader";
-import Task from "./Task";
+import Task from "../Tasks/Task";
 import axios from "axios";
 
 
 
 function List(props){
 
+    //stores state of tasks
     const [tasks, setTask] = useState([]);
 
+    //gets the lists from backend database
     useEffect(() =>{
         axios.get(`/lists/${props.id}`)
 
@@ -39,7 +41,7 @@ function List(props){
                return <Task key = {task._id} id = {task._id} taskName = {task.taskName} taskDesc = {task.content}/>
             })}
 
-          <ListButton listId = {props.id} tasks = {tasks} addTask={addTask}/>
+          <AddTaskButton listId = {props.id} tasks = {tasks} addTask={addTask}/>
           
 
 

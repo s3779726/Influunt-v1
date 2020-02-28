@@ -34,8 +34,9 @@ function App() {
   return (
       <div>
         <Navbar addList={addList} />
-        <h1 className="display-4 list-title">Project Task Lists</h1>
         <div className="container-fluid">
+        <h1 className="display-4 list-title">Project Task Lists</h1>
+
 
           {lists.map((list) => {
             return (<List key={list._id} id = {list._id} listTitle={list.listTitle} deleteList = {deleteList}/>)

@@ -3,7 +3,7 @@ import axios from "axios";
 function DeleteListModal(props){
 
 
-
+//performs a delete request to backend to delete entire list
     function deleteList(e){
       
         e.preventDefault();

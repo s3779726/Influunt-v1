@@ -3,13 +3,13 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import CreateTaskModal from "../Modals/CreateTaskModal";
 
 
-
-function ListButton(props){
+//refers to the Add task button may need to rename for clarity since technically all of the list items are buttons
+function AddTaskButton(props){
 
 
       const dataTarget = `#createTaskModal-${props.listId}`;
 return (<div>
-            <button type="button" className="btn btn-primary list-group-item list-button" data-toggle="modal" data-target={dataTarget}>
+            <button type="button" className="btn btn-primary list-group-item add-task-button" data-toggle="modal" data-target={dataTarget}>
                 <li>
                     Add Task...
                     <AddBoxIcon  className="icon-margin" />
@@ -22,4 +22,4 @@ return (<div>
 
 
 
-export default ListButton;
+export default AddTaskButton;

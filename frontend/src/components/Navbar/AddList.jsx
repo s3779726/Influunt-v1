@@ -1,6 +1,7 @@
 import React from "react";
 import AddListModal from "../Modals/AddListModal";
 
+//add list button at nav bar
 function AddList(props){
 return (
 <div>

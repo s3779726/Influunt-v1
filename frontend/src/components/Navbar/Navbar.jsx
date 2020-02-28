@@ -1,6 +1,7 @@
 import React from "react";
 import AddList from "./AddList"
 
+//basic navbar with bootstrap
 function Navbar(props){
     return (
         <nav className = "navbar navbar-expand-lg navbar-dark bg-dark add-padding add-nav">
