@@ -3,6 +3,7 @@ import ViewTaskModal from "../Modals/ViewTaskModal";
 
 function Task(props){
 
+
     return (
             <div >
             <button className="list-group-item custom-list-item task list-button" data-toggle="modal" data-target={`#viewTaskModal-${props.id}`}>
