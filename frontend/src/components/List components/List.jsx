@@ -24,6 +24,11 @@ function List(props){
         });
     },[props.id]);
 
+    function addTask(task){
+        setTask((prevValue) =>{
+           return [...prevValue, task];
+        });
+    }
 
 
     return(
@@ -34,7 +39,7 @@ function List(props){
                return <Task key = {task._id} id = {task._id} taskName = {task.taskName} taskDesc = {task.content}/>
             })}
 
-          <ListButton/>
+          <ListButton listId = {props.id} tasks = {tasks} addTask={addTask}/>
           
 
 

@@ -4,21 +4,19 @@ import CreateTaskModal from "../Modals/CreateTaskModal";
 
 
 
-function ListButton(){
+function ListButton(props){
 
 
-
-
-      
+      const dataTarget = `#createTaskModal-${props.listId}`;
 return (<div>
-            <button type="button" className="btn btn-primary list-group-item list-button" data-toggle="modal" data-target="#createTaskModal">
+            <button type="button" className="btn btn-primary list-group-item list-button" data-toggle="modal" data-target={dataTarget}>
                 <li>
                     Add Task...
                     <AddBoxIcon  className="icon-margin" />
                 </li>
 
             </button>
-            <CreateTaskModal/>
+            <CreateTaskModal listId = {props.listId} tasks = {props.tasks} onClick={props.addTask}/>
         </div>);
 }
 

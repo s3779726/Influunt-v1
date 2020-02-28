@@ -1,9 +1,10 @@
 import React, {useState} from "react";
-function CreateTaskModal(){
+import axios from "axios";
+function CreateTaskModal(props){
 
     const [task, setTask] = useState({
-        name:"",
-        desc:""
+        taskName:"",
+        content:""
 
     });
 
@@ -17,13 +18,39 @@ function CreateTaskModal(){
 
     function handleClick(e){
         e.preventDefault();
-        console.log(task);
+        const bodyData = {
+          tasks:[...props.tasks, task]
+        };
+
+
+
+        // const jsonData = JSON.stringify(bodyData);
+
+        axios.patch(`/lists/${props.listId}`, bodyData)
+            .then(function (response) {
+                // handle success
+                console.log(response);
+                props.onClick(task);
+                setTask({
+                    taskName:"",
+                    content:""
+                });
+
+
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
     }
 
-
+    const modalId = `createTaskModal-${props.listId}`;
     return (
     
-    <div className="modal fade"  id="createTaskModal" tabIndex="-1" role="dialog" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+    <div className="modal fade"  id={modalId} tabIndex="-1" role="dialog" aria-labelledby="createTaskModalLabel" aria-hidden="true">
     <div className="modal-dialog modal-dialog-scrollable" role="document">
       <div className="modal-content">
         <div className="modal-header">
@@ -36,11 +63,11 @@ function CreateTaskModal(){
           <form>
               <div className="form-group">
                 <label htmlFor="taskName"  className="col-form-label" >Task Name:</label>
-                <input type="text" onChange = {handleChange}  name = "name" className="form-control"/>
+                <input type="text" onChange = {handleChange}  autoComplete="off" name = "taskName" className="form-control"/>
               </div>
              <div className="form-group">
-              <label htmlFor="message-text"   className="col-form-label" >Task Desc:</label>
-              <textarea className="form-control"  onChange = {handleChange} name = "desc" rows="7"/>
+              <label htmlFor="message-text"   className="col-form-label" >Break down the task into smaller steps:</label>
+              <textarea className="form-control"  onChange = {handleChange} name = "content" rows="7"/>
               
             </div>
           </form>
@@ -48,7 +75,7 @@ function CreateTaskModal(){
 
         <div className="modal-footer">
           <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" onClick = {handleClick} className="btn btn-primary">Add Task</button>
+          <button type="button" onClick = {handleClick} data-dismiss="modal" className="btn btn-primary">Add Task</button>
         </div>
       </div>
     </div>
