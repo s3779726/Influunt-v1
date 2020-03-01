@@ -2,7 +2,60 @@ import React, {useState} from "react";
 
 import EditableTaskHeader from "../EditableTaskHeader";
 import EditableTaskDesc from "../EditableTaskDesc";
+import axios from "axios";
 function ViewTaskModel(props){
+
+
+    const [editedTask, setEditedTask] = useState({
+        taskName:props.taskName,
+        content:props.taskDesc
+    });
+
+    function setEditTaskValues(name, value){
+
+        const trimSpaces = value => {
+            return value
+                .replace(/&nbsp;/g, '')
+                .replace(/&amp;/g, '&')
+                .replace(/&gt;/g, '>')
+                .replace(/&lt;/g, '<')
+        };
+        setEditedTask((prevValue) =>{
+           return {...prevValue, [name]:trimSpaces(value)};
+        });
+
+    }
+
+    function editTasksArray(){
+        const taskIndex = props.tasks.findIndex((task) =>{
+           return task._id === props.id;
+        });
+        props.tasks[taskIndex].taskName = editedTask.taskName;
+        props.tasks[taskIndex].content = editedTask.content;
+        props.setTasks((prevValue) =>{
+            return [...prevValue];
+        });
+        updateTaskInDb();
+
+    }
+    function updateTaskInDb(){
+
+        const bodyData = {
+            tasks:[...props.tasks]
+        };
+
+
+        axios.patch(`/lists/${props.listId}`, bodyData)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+    }
 
 
     return(
@@ -11,14 +64,14 @@ function ViewTaskModel(props){
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <EditableTaskHeader taskName={props.taskName}/>
+                        <EditableTaskHeader taskName={props.taskName} editTaskValues = {setEditTaskValues} id ={props.id} tasks={props.tasks} editTaskArray = {editTasksArray}/>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div className="modal-body">
                         <h6 className="col-form-label">Description</h6>
-                    <EditableTaskDesc taskDesc = {props.taskDesc}/>
+                    <EditableTaskDesc taskDesc = {props.taskDesc} editTaskValues = {setEditTaskValues} tasks={props.tasks} editTaskArray={editTasksArray}/>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

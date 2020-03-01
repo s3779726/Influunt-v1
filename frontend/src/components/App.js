@@ -39,7 +39,7 @@ function App() {
 
 
           {lists.map((list) => {
-            return (<List key={list._id} id = {list._id} listTitle={list.listTitle} deleteList = {deleteList}/>)
+            return (<List key={list._id} id = {list._id} listTitle={list.listTitle} deleteList = {deleteList} lists={lists} setLists={setLists}/>)
           })}
         </div>
         
