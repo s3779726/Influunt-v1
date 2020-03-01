@@ -1,6 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
+
+
 function CreateTaskModal(props){
+
 
     const [task, setTask] = useState({
         taskName:"",
@@ -27,9 +30,19 @@ function CreateTaskModal(props){
 
         axios.patch(`/lists/${props.listId}`, bodyData)
             .then(function (response) {
-                // handle success
-                props.onClick(task);
+                // handle successs
+                axios.get(`/lists/${props.listId}`)
 
+                    .then(function(response){
+                        const [responseData] = response.data;
+                        console.log(response);
+                        props.setTasks(responseData.tasks);
+
+                    })
+                    .catch(function(error){
+                        console.log(error);
+
+                    });
 
             })
             .catch(function (error) {
@@ -37,12 +50,22 @@ function CreateTaskModal(props){
                 console.log(error);
             })
             .then(function () {
+
                 setTask({
                     taskName:"",
                     content:""
                 });
 
+
+
+
             });
+
+
+
+
+
+
     }
 
     const modalId = `createTaskModal-${props.listId}`;

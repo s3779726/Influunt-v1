@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 
-import EditableTaskHeader from "../EditableTaskHeader";
-import EditableTaskDesc from "../EditableTaskDesc";
+import EditableTaskHeader from "../Tasks/EditableTaskHeader";
+import EditableTaskDesc from "../Tasks/EditableTaskDesc";
+import DeleteTaskButton from "../Tasks/DeleteTaskButton";
 import axios from "axios";
+import List from "../List components/List";
 function ViewTaskModel(props){
 
 
@@ -58,6 +60,9 @@ function ViewTaskModel(props){
     }
 
 
+
+
+
     return(
         <div className="modal fade" id={`viewTaskModal-${props.id}`} tabIndex="-1" role="dialog"
              aria-labelledby={`viewTaskModal-${props.id}`} aria-hidden="true">
@@ -75,7 +80,7 @@ function ViewTaskModel(props){
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-danger">Delete Task</button>
+                        <DeleteTaskButton  id = {props.id} deleteTask ={props.deleteTask} tasks = {props.tasks} listId={props.listId} listTitle={props.listTitle} />
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import ViewTaskModal from "../Modals/ViewTaskModal";
+import List from "../List components/List";
 
 function Task(props){
 
@@ -11,7 +12,17 @@ function Task(props){
                 <li> {props.taskName}</li>
 
             </button>
-                <ViewTaskModal taskName = {props.taskName} taskDesc = {props.taskDesc} id={props.id} tasks = {props.tasks} setTasks = {props.setTasks} listId = {props.listId} />
+                <ViewTaskModal
+                    taskName = {props.taskName}
+                               taskDesc = {props.taskDesc}
+                               id={props.id}
+                               tasks = {props.tasks}
+                               setTasks = {props.setTasks}
+                               listId = {props.listId}
+                               deleteTask ={props.deleteTask}
+                               listTitle={props.listTitle}
+
+                />
             </div>
 
 

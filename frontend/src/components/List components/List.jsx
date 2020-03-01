@@ -12,6 +12,7 @@ function List(props){
     const [tasks, setTasks] = useState([]);
 
     //gets the lists from backend database
+
     useEffect(() =>{
         axios.get(`/lists/${props.id}`)
 
@@ -32,15 +33,38 @@ function List(props){
         });
     }
 
+    function deleteTask(id){
+
+        setTasks((prevValue) =>{
+           return prevValue.filter((task) =>{
+             return task._id !== id;
+           });
+        });
+    }
+
+
+
+
     return(
         <div className="card list list-width">
         <ListHeader id = {props.id} deleteList = {props.deleteList} listTitle = {props.listTitle}/>
         <ul className="list-group list-group-flush remove-list-bullet">
             {tasks.map((task) => {
-               return <Task key = {task._id} id = {task._id} taskName = {task.taskName} taskDesc = {task.content} tasks = {tasks} setTasks = {setTasks} listId = {props.id}/>
+               return <Task
+                            key = {task._id}
+                            id = {task._id}
+                            taskName = {task.taskName}
+                            taskDesc = {task.content}
+                            tasks = {tasks}
+                            setTasks = {setTasks}
+                            listId = {props.id}
+                            deleteTask ={deleteTask}
+                            listTitle={props.listTitle}
+               />
+
             })}
 
-          <AddTaskButton listId = {props.id} tasks = {tasks} addTask={addTask}/>
+          <AddTaskButton listId = {props.id} tasks = {tasks} addTask={addTask}  setTasks = {setTasks}/>
           
 
 

@@ -35,8 +35,6 @@ app.route("/lists").get(function(req,res){
 .post(function(req,res){
     const listTitle = req.body.listTitle;
 
-    const newData = req.body;
-    console.log(newData);
     const newList = new List({
         listTitle:listTitle,
         tasks:[]
@@ -79,8 +77,9 @@ app.route("/lists/:listId")
       });
 })
 .put(function(req,res){
-    const updateObject = req.body;
-    List.update({ _id:req.params.listId}, {listTitle:updateObject.listTitle}, {overwrite:true}, function(err) {
+    const updateObject = req.body.bodyData;
+    console.log(req.body.bodyData);
+    List.update({ _id:req.params.listId}, {listTitle:updateObject.listTitle, tasks:updateObject.tasks}, {overwrite:true}, function(err) {
         (err)?console.log(err): res.send("Successfully updated the list");
         
       });
@@ -92,6 +91,8 @@ app.route("/lists/:listId")
       });
 
 });
+
+
 
 
 
