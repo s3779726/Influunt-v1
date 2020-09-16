@@ -13,7 +13,7 @@ function DeleteTaskButton(props){
         const newTasks = props.tasks.filter((task) => {
             return task._id !== props.id;
         });
-        console.log(props.listTitle);
+
 
         const bodyData = {
             listTitle:props.listTitle,
@@ -22,7 +22,7 @@ function DeleteTaskButton(props){
 
         axios.put(`/lists/${props.listId}`, {bodyData})
             .then(function (response) {
-                console.log(response);
+
             })
             .catch(function (error) {
                 console.log(error);

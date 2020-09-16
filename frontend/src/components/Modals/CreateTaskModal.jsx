@@ -30,12 +30,11 @@ function CreateTaskModal(props){
 
         axios.patch(`/lists/${props.listId}`, bodyData)
             .then(function (response) {
-                // handle successs
+
                 axios.get(`/lists/${props.listId}`)
 
                     .then(function(response){
                         const [responseData] = response.data;
-                        console.log(response);
                         props.setTasks(responseData.tasks);
 
                     })
